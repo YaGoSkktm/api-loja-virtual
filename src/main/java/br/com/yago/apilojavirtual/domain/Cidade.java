@@ -1,5 +1,6 @@
 package br.com.yago.apilojavirtual.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -13,6 +14,7 @@ public class Cidade implements Serializable {
     private Integer id;
     private String nome;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name="estado_id")
     private Estado estado;

@@ -1,6 +1,7 @@
 package br.com.yago.apilojavirtual.domain;
 
 import br.com.yago.apilojavirtual.domain.Enums.TipoCliente;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -21,6 +22,7 @@ public class Cliente implements Serializable {
     private String cpfOuCnpj;
     private Integer tipo;
 
+    @JsonManagedReference
     @OneToMany(mappedBy="cliente")
     private List<Endereco> enderecos = new ArrayList<>();
 

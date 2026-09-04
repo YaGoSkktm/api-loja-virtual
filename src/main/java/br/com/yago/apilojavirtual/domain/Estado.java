@@ -1,5 +1,6 @@
 package br.com.yago.apilojavirtual.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -15,6 +16,7 @@ public class Estado implements Serializable {
     private Integer id;
     private String nome;
 
+    @JsonManagedReference
     @OneToMany(mappedBy="estado")
     private List<Cidade> cidades = new ArrayList<>();
 
