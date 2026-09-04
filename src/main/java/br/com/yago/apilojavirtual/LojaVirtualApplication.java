@@ -2,14 +2,9 @@ package br.com.yago.apilojavirtual;
 
 import java.util.Arrays;
 
-import br.com.yago.apilojavirtual.domain.Categoria;
-import br.com.yago.apilojavirtual.domain.Cidade;
-import br.com.yago.apilojavirtual.domain.Estado;
-import br.com.yago.apilojavirtual.domain.Produto;
-import br.com.yago.apilojavirtual.repositories.CategoriaRepository;
-import br.com.yago.apilojavirtual.repositories.CidadeRepository;
-import br.com.yago.apilojavirtual.repositories.EstadoRepository;
-import br.com.yago.apilojavirtual.repositories.ProdutoRepository;
+import br.com.yago.apilojavirtual.domain.*;
+import br.com.yago.apilojavirtual.domain.Enums.TipoCliente;
+import br.com.yago.apilojavirtual.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -30,6 +25,12 @@ public class LojaVirtualApplication implements CommandLineRunner {
 
     @Autowired
     private EstadoRepository estadoRepository;
+
+    @Autowired
+    private ClienteRepository clienteRepository;
+    @Autowired
+
+    private EnderecoRepository enderecoRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(LojaVirtualApplication.class, args);
@@ -63,6 +64,18 @@ public class LojaVirtualApplication implements CommandLineRunner {
 
         estadoRepository.saveAll(Arrays.asList(est1, est2));
         cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
+
+        Cliente cli1 = new Cliente(null, "Maria Silva", "maria@gmail.com", "36378912377", TipoCliente.PESSOAFISICA);
+
+        cli1.getTelefones().addAll(Arrays.asList("27363323", "93838393"));
+
+        Endereco e1 = new Endereco(null, "Rua Flores", "300", "Apto 303", "Jardim", "38220834", cli1, c1);
+        Endereco e2 = new Endereco(null, "Avenida Matos", "105", "Sala 800", "Centro", "38777012", cli1, c2);
+
+        cli1.getEnderecos().addAll(Arrays.asList(e1, e2));
+
+        clienteRepository.saveAll(Arrays.asList(cli1));
+        enderecoRepository.saveAll(Arrays.asList(e1, e2));
 
     }
 
