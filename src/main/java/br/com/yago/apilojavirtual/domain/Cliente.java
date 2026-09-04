@@ -1,6 +1,7 @@
 package br.com.yago.apilojavirtual.domain;
 
 import br.com.yago.apilojavirtual.domain.Enums.TipoCliente;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
@@ -30,6 +31,7 @@ public class Cliente implements Serializable {
     @CollectionTable(name="TELEFONE")
     private Set<String> telefones = new HashSet<>();
 
+    @JsonBackReference
     @OneToMany(mappedBy="cliente")
     private List<Pedido> pedidos = new ArrayList<>();
 
@@ -48,6 +50,7 @@ public class Cliente implements Serializable {
     public List<Pedido> getPedidos() {
         return pedidos;
     }
+
 
     public void setPedidos(List<Pedido> pedidos) {
         this.pedidos = pedidos;
